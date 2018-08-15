@@ -2,6 +2,8 @@ var SpeedMatch = SpeedMatch || {};
 
 SpeedMatch.GameOptions = {
     tileSize: 500,
+    totalFrameCount: 6,
+    tileTimerDelay: 1000,
     aspectRatio: 16 / 9
 };
 
