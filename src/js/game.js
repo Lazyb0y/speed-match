@@ -1,6 +1,9 @@
 var SpeedMatch = SpeedMatch || {};
 
-SpeedMatch.GameOptions = {};
+SpeedMatch.GameOptions = {
+    tileSize: 500,
+    aspectRatio: 16 / 9
+};
 
 /* Resizing the game to cover the wider area possible */
 function resizeGame() {
@@ -20,9 +23,11 @@ function resizeGame() {
 }
 
 window.onload = function () {
+    let width = SpeedMatch.GameOptions.tileSize * 2;
+
     SpeedMatch.GameConfig = {
-        width: 480,
-        height: 640,
+        width: width,
+        height: width * SpeedMatch.GameOptions.aspectRatio,
         backgroundColor: 0xecf0f1,
         scene: [BootScene, PreloadScene, GameScene]
     };

@@ -4,6 +4,9 @@ class PreloadScene extends Phaser.Scene {
     }
 
     preload() {
+        /* Loading images and sprites */
+        this.load.image("yes", "assets/sprites/yes.png");
+        this.load.image("no", "assets/sprites/no.png");
     }
 
     create() {
