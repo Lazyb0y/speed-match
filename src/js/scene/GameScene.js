@@ -5,6 +5,7 @@ class GameScene extends Phaser.Scene {
 
     init() {
         this.canPlay = false;
+        this.buttonAppearing = false;
         this.timedEvent = null;
 
         this.previousFrame = -1;
@@ -13,6 +14,9 @@ class GameScene extends Phaser.Scene {
         this.symbol = null;
         this.appIcon = null;
         this.hints = null;
+
+        this.yesButton = null;
+        this.noButton = null;
 
         this.scoreText = null;
         this.bestScoreText = null;
@@ -33,15 +37,15 @@ class GameScene extends Phaser.Scene {
         this.appIcon.setOrigin(0.5, 0);
 
         /* Adding UI buttons */
-        let noButton = this.add.sprite(0, SpeedMatch.game.config.height, "no");
-        noButton.setOrigin(0, 1);
-        noButton.setInteractive();
-        noButton.on("pointerdown", this.handleNo, this);
+        this.noButton = this.add.sprite(0, SpeedMatch.game.config.height + 300, "no");
+        this.noButton.setOrigin(0, 1);
+        this.noButton.setInteractive();
+        this.noButton.on("pointerdown", this.handleNo, this);
 
-        let yesButton = this.add.sprite(SpeedMatch.game.config.width, SpeedMatch.game.config.height, "yes");
-        yesButton.setOrigin(1, 1);
-        yesButton.setInteractive();
-        yesButton.on("pointerdown", this.handleYes, this);
+        this.yesButton = this.add.sprite(SpeedMatch.game.config.width, SpeedMatch.game.config.height + 300, "yes");
+        this.yesButton.setOrigin(1, 1);
+        this.yesButton.setInteractive();
+        this.yesButton.on("pointerdown", this.handleYes, this);
 
         /* Loading symbols */
         this.symbol = this.add.sprite(SpeedMatch.game.config.width / 2, SpeedMatch.game.config.height / 2, "symbols", 0);
@@ -89,7 +93,19 @@ class GameScene extends Phaser.Scene {
         }
 
         if (this.timedEvent !== null) {
-            this.timerText.text = (this.timedEvent.delay / 1000 - this.timedEvent.getElapsedSeconds()).toFixed(2);
+            let remainingTime = this.timedEvent.delay / 1000 - this.timedEvent.getElapsedSeconds();
+            this.timerText.text = (remainingTime).toFixed(2);
+
+            /* Buttons appearing animation */
+            if (!this.buttonAppearing && remainingTime <= SpeedMatch.GameOptions.animations.buttonAppearDelay / 1000) {
+                this.buttonAppearing = true;
+                this.tweens.add({
+                    targets: [this.noButton, this.yesButton],
+                    y: SpeedMatch.game.config.height,
+                    duration: SpeedMatch.GameOptions.animations.buttonAppearDelay,
+                    callbackScope: this
+                });
+            }
         }
     }
 
