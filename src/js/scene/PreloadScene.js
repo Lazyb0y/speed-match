@@ -4,6 +4,10 @@ class PreloadScene extends Phaser.Scene {
     }
 
     preload() {
+        /* Showing application title */
+        let appIcon = this.add.image(SpeedMatch.game.config.width / 2, SpeedMatch.game.config.height / 4, "apptitle");
+        appIcon.setOrigin(0.5, 0.5);
+        
         /* Loading images and sprites */
         this.load.image("yes", "assets/sprites/yes.png");
         this.load.image("no", "assets/sprites/no.png");
