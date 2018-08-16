@@ -3,6 +3,7 @@ var SpeedMatch = SpeedMatch || {};
 SpeedMatch.GameOptions = {
     tileSize: 500,
     totalFrameCount: 6,
+    tileTimerInitialDelay: 3000,
     tileTimerDelay: 1000,
     animations: {
         symbolAppearDelay: 50

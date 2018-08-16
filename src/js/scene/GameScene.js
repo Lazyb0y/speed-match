@@ -107,7 +107,7 @@ class GameScene extends Phaser.Scene {
 
     scheduleNextTimer() {
         let timerConfig = {
-            delay: SpeedMatch.GameOptions.tileTimerDelay,
+            delay: this.timedEvent === null ? SpeedMatch.GameOptions.tileTimerInitialDelay : SpeedMatch.GameOptions.tileTimerDelay,
             callback: this.onTimerEvent,
             callbackScope: this,
             paused: false
