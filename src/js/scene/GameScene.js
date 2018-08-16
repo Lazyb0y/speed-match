@@ -82,10 +82,16 @@ class GameScene extends Phaser.Scene {
 
     handleScreenSizeChange() {
         if (this.previousClientWidth > this.previousClientHeight) {
+            if (this.timedEvent !== null) {
+                this.timedEvent.paused = true;
+            }
             this.isPortraitMode = false;
             document.getElementById("turn").style.display = "block";
         }
         else {
+            if (this.timedEvent !== null) {
+                this.timedEvent.paused = false;
+            }
             this.isPortraitMode = true;
             document.getElementById("turn").style.display = "none";
         }
