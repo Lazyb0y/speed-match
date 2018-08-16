@@ -59,8 +59,8 @@ class GameScene extends Phaser.Scene {
             this.showNextSymbol();
         }
         else {
-            this.scene.start("EndScene");
             this.timedEvent.remove(false);
+            this.scene.start("EndScene");
         }
     }
 
@@ -102,6 +102,7 @@ class GameScene extends Phaser.Scene {
             this.showNextSymbol();
         }
         else {
+            this.timedEvent.remove(false);
             this.scene.start("EndScene");
         }
     }
@@ -118,6 +119,7 @@ class GameScene extends Phaser.Scene {
             this.showNextSymbol();
         }
         else {
+            this.timedEvent.remove(false);
             this.scene.start("EndScene");
         }
     }
