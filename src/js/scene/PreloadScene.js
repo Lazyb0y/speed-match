@@ -32,6 +32,7 @@ class PreloadScene extends Phaser.Scene {
 
         /* Loading font */
         this.load.bitmapFont("font", "assets/fonts/font.png", "assets/fonts/font.fnt");
+        this.load.bitmapFont("timerfont", "assets/fonts/timerfont.png", "assets/fonts/timerfont.fnt");
     }
 
     create() {

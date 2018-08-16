@@ -15,6 +15,7 @@ class GameScene extends Phaser.Scene {
 
         this.scoreText = null;
         this.bestScoreText = null;
+        this.timerText = null;
 
         this.score = 0;
         this.bestScore = 0;
@@ -44,18 +45,21 @@ class GameScene extends Phaser.Scene {
         this.hints = this.add.sprite(SpeedMatch.game.config.width / 2, SpeedMatch.game.config.height / 2 + SpeedMatch.GameOptions.tileSize / 2 + 100, "gamemessages", 0);
         this.hints.setOrigin(0.5, 0.5);
 
+        this.timerText = this.add.bitmapText(SpeedMatch.game.config.width / 2, SpeedMatch.game.config.height / 2 - SpeedMatch.GameOptions.tileSize / 2 - 50, "timerfont", SpeedMatch.GameOptions.tileTimerDelay.toString(), 100);
+        this.timerText.setOrigin(0.5, 0.5);
+
         /* UI scores */
         let scoreX = SpeedMatch.game.config.width / 2;
-        let scoreY = (SpeedMatch.game.config.height / 2) - SpeedMatch.GameOptions.tileSize;
+        let scoreY = (SpeedMatch.game.config.height / 2) - SpeedMatch.GameOptions.tileSize + 50;
         this.add.image(scoreX, scoreY, "scorepanel");
         this.add.image(scoreX, scoreY - 90, "scorelabels");
 
         let scoreTextX = SpeedMatch.game.config.width / 8;
-        let scoreTextY = (SpeedMatch.game.config.height / 2) - SpeedMatch.GameOptions.tileSize - 45;
+        let scoreTextY = (SpeedMatch.game.config.height / 2) - SpeedMatch.GameOptions.tileSize + 5;
         this.scoreText = this.add.bitmapText(scoreTextX, scoreTextY, "font", "0", 100);
 
         let bestScoreTextX = (SpeedMatch.game.config.width / 8) * 4.3;
-        let bestScoreTextY = (SpeedMatch.game.config.height / 2) - SpeedMatch.GameOptions.tileSize - 45;
+        let bestScoreTextY = (SpeedMatch.game.config.height / 2) - SpeedMatch.GameOptions.tileSize + 5;
         this.bestScoreText = this.add.bitmapText(bestScoreTextX, bestScoreTextY, "font", "0", 100);
 
         /* Showing best score from local storage */
@@ -77,6 +81,10 @@ class GameScene extends Phaser.Scene {
                 this.previousClientHeight = clientHeight;
                 this.handleScreenSizeChange();
             }
+        }
+
+        if (this.timedEvent !== null) {
+            this.timerText.text = (this.timedEvent.delay / 1000 - this.timedEvent.getElapsedSeconds()).toFixed(2);
         }
     }
 
