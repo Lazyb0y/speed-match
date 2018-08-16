@@ -11,6 +11,7 @@ class GameScene extends Phaser.Scene {
         this.currentFrame = -1;
 
         this.symbol = null;
+        this.hints = null;
 
         this.scoreText = null;
         this.bestScoreText = null;
@@ -34,6 +35,9 @@ class GameScene extends Phaser.Scene {
         /* Loading symbols */
         this.symbol = this.add.sprite(SpeedMatch.game.config.width / 2, SpeedMatch.game.config.height / 2, "symbols", 0);
         this.symbol.setOrigin(0.5, 0.5);
+
+        this.hints = this.add.sprite(SpeedMatch.game.config.width / 2, SpeedMatch.game.config.height / 2 + SpeedMatch.GameOptions.tileSize / 2 + 100, "gamemessages", 0);
+        this.hints.setOrigin(0.5, 0.5);
 
         /* UI scores */
         let scoreX = SpeedMatch.game.config.width / 2;
@@ -116,6 +120,13 @@ class GameScene extends Phaser.Scene {
                 }
             }
         });
+
+        if (this.previousFrame === -1) {
+            this.hints.setFrame(0);
+        }
+        else {
+            this.hints.setFrame(1);
+        }
     }
 
     incrementScore() {

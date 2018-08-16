@@ -23,6 +23,11 @@ class PreloadScene extends Phaser.Scene {
             frameHeight: SpeedMatch.GameOptions.tileSize
         });
 
+        this.load.spritesheet("gamemessages", "assets/sprites/gamemessages.png", {
+            frameWidth: 700,
+            frameHeight: 100
+        });
+
         /* Loading font */
         this.load.bitmapFont("font", "assets/fonts/font.png", "assets/fonts/font.fnt");
     }
