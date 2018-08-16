@@ -7,6 +7,9 @@ SpeedMatch.GameOptions = {
     animations: {
         symbolAppearDelay: 50
     },
+    storage: {
+        bestScore: "speedMatchBestScore"
+    },
     aspectRatio: 16 / 9
 };
 

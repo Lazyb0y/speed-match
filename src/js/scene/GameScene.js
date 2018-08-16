@@ -16,6 +16,7 @@ class GameScene extends Phaser.Scene {
         this.bestScoreText = null;
 
         this.score = 0;
+        this.bestScore = 0;
     }
 
     create() {
@@ -47,6 +48,13 @@ class GameScene extends Phaser.Scene {
         let bestScoreTextX = (SpeedMatch.game.config.width / 8) * 4.3;
         let bestScoreTextY = (SpeedMatch.game.config.height / 2) - SpeedMatch.GameOptions.tileSize - 45;
         this.bestScoreText = this.add.bitmapText(bestScoreTextX, bestScoreTextY, "font", "0", 100);
+
+        /* Showing best score from local storage */
+        this.bestScore = localStorage.getItem(SpeedMatch.GameOptions.storage.bestScore);
+        if (this.bestScore == null) {
+            this.bestScore = 0;
+        }
+        this.bestScoreText.text = this.bestScore.toString();
 
         this.showNextSymbol();
     }
@@ -107,6 +115,17 @@ class GameScene extends Phaser.Scene {
         });
     }
 
+    incrementScore() {
+        this.score++;
+        this.scoreText.text = this.score.toString();
+
+        if (this.score > this.bestScore) {
+            this.bestScore = this.score;
+            this.bestScoreText.text = this.bestScore.toString();
+            localStorage.setItem(SpeedMatch.GameOptions.storage.bestScore, this.bestScore);
+        }
+    }
+
     handleNo() {
         if (!this.canPlay) {
             return;
@@ -115,7 +134,7 @@ class GameScene extends Phaser.Scene {
         this.timedEvent.paused = true;
 
         if (this.previousFrame !== this.currentFrame) {
-            this.score++;
+            this.incrementScore();
             this.showNextSymbol();
         }
         else {
@@ -132,7 +151,7 @@ class GameScene extends Phaser.Scene {
         this.timedEvent.paused = true;
 
         if (this.previousFrame === this.currentFrame) {
-            this.score++;
+            this.incrementScore();
             this.showNextSymbol();
         }
         else {
