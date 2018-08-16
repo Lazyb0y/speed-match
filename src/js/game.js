@@ -31,7 +31,7 @@ window.onload = function () {
         width: width,
         height: width * SpeedMatch.GameOptions.aspectRatio,
         backgroundColor: 0xecf0f1,
-        scene: [BootScene, PreloadScene, GameScene]
+        scene: [BootScene, PreloadScene, GameScene, EndScene]
     };
 
     /* Initializing the Phaser 3 framework */
