@@ -73,12 +73,21 @@ class GameScene extends Phaser.Scene {
             this.currentFrame = Phaser.Math.Between(0, SpeedMatch.GameOptions.totalFrameCount - 1);
         }
 
+        /* Showing symbol appearing animation */
+        this.symbol.alpha = 0;
         this.symbol.setFrame(this.currentFrame);
-        this.scheduleNextTimer();
-
-        if (this.previousFrame !== -1) {
-            this.canPlay = true;
-        }
+        this.tweens.add({
+            targets: [this.symbol],
+            alpha: 1,
+            duration: SpeedMatch.GameOptions.animations.symbolAppearDelay,
+            callbackScope: this,
+            onComplete: function () {
+                this.scheduleNextTimer();
+                if (this.previousFrame !== -1) {
+                    this.canPlay = true;
+                }
+            }
+        });
     }
 
     handleNo() {
