@@ -11,6 +11,8 @@ class GameScene extends Phaser.Scene {
         this.currentFrame = -1;
 
         this.symbol = null;
+
+        this.score = 0;
     }
 
     create() {
@@ -29,35 +31,54 @@ class GameScene extends Phaser.Scene {
         this.symbol = this.add.sprite(SpeedMatch.game.config.width / 2, SpeedMatch.game.config.height / 2, "symbols", 0);
         this.symbol.setOrigin(0.5, 0.5);
 
-        this.scheduleNextTimer();
+        this.showNextSymbol();
     }
 
     scheduleNextTimer() {
-        this.timedEvent = this.time.addEvent({
+        let timerConfig = {
             delay: SpeedMatch.GameOptions.tileTimerDelay,
             callback: this.onTimerEvent,
-            callbackScope: this
-        });
+            callbackScope: this,
+            paused: false
+        };
+
+        if (this.timedEvent === null) {
+            this.timedEvent = this.time.addEvent(timerConfig);
+        }
+        else {
+            this.timedEvent.remove(false);
+            this.timedEvent = this.time.addEvent(timerConfig);
+        }
+        this.timedEvent.paused = false;
     }
 
     onTimerEvent() {
+        this.canPlay = false;
+        this.timedEvent.paused = true;
+        if (this.previousFrame === -1) {
+            this.showNextSymbol();
+        }
+        else {
+            console.log("FAIL");
+            this.timedEvent.remove(false);
+        }
+    }
+
+    showNextSymbol() {
         this.previousFrame = this.currentFrame;
         let showPrevious = Phaser.Math.Between(0, 100) > 50 && this.currentFrame !== -1;
         if (showPrevious) {
-            console.log("same: " + this.currentFrame);
         }
         else {
             this.currentFrame = Phaser.Math.Between(0, SpeedMatch.GameOptions.totalFrameCount - 1);
-            if (this.currentFrame === this.previousFrame) {
-                console.log("same: " + this.currentFrame);
-            }
-            else {
-                console.log("not : " + this.currentFrame);
-            }
         }
 
         this.symbol.setFrame(this.currentFrame);
         this.scheduleNextTimer();
+
+        if (this.previousFrame !== -1) {
+            this.canPlay = true;
+        }
     }
 
     handleNo() {
@@ -65,7 +86,15 @@ class GameScene extends Phaser.Scene {
             return;
         }
         this.canPlay = false;
-        console.log("pressed NO");
+        this.timedEvent.paused = true;
+
+        if (this.previousFrame !== this.currentFrame) {
+            this.score++;
+            this.showNextSymbol();
+        }
+        else {
+            console.log("FAIL");
+        }
     }
 
     handleYes() {
@@ -73,6 +102,14 @@ class GameScene extends Phaser.Scene {
             return;
         }
         this.canPlay = false;
-        console.log("pressed YES");
+        this.timedEvent.paused = true;
+
+        if (this.previousFrame === this.currentFrame) {
+            this.score++;
+            this.showNextSymbol();
+        }
+        else {
+            console.log("FAIL");
+        }
     }
 }
