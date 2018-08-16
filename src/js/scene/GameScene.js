@@ -18,12 +18,12 @@ class GameScene extends Phaser.Scene {
         let noButton = this.add.sprite(0, SpeedMatch.game.config.height, "no");
         noButton.setOrigin(0, 1);
         noButton.setInteractive();
-        noButton.on("pointerdown", this.handleNo);
+        noButton.on("pointerdown", this.handleNo, this);
 
         let yesButton = this.add.sprite(SpeedMatch.game.config.width, SpeedMatch.game.config.height, "yes");
         yesButton.setOrigin(1, 1);
         yesButton.setInteractive();
-        yesButton.on("pointerdown", this.handleYes);
+        yesButton.on("pointerdown", this.handleYes, this);
 
         /* Loading symbols */
         this.symbol = this.add.sprite(SpeedMatch.game.config.width / 2, SpeedMatch.game.config.height / 2, "symbols", 0);
