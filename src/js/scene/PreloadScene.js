@@ -16,6 +16,8 @@ class PreloadScene extends Phaser.Scene {
         this.load.image("no", "assets/sprites/no.png");
         this.load.image("scorelabels", "assets/sprites/scorelabels.png");
         this.load.image("scorepanel", "assets/sprites/scorepanel.png");
+        this.load.image("gameintro", "assets/sprites/gameintro.png");
+        this.load.image("start", "assets/sprites/start.png");
 
         /* Loading spritesheet */
         this.load.spritesheet("symbols", "assets/sprites/symbols.png", {
@@ -33,7 +35,7 @@ class PreloadScene extends Phaser.Scene {
     }
 
     create() {
-        this.scene.start("GameScene");
+        this.scene.start("IntroScene");
     }
 
     setupProgressBar() {
