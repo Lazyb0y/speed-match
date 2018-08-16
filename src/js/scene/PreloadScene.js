@@ -3,10 +3,14 @@ class PreloadScene extends Phaser.Scene {
         super("PreloadScene");
     }
 
+    init() {
+        this.appIcon = null;
+    }
+
     preload() {
         /* Showing application title */
-        let appIcon = this.add.image(SpeedMatch.game.config.width / 2, SpeedMatch.game.config.height / 4, "apptitle");
-        appIcon.setOrigin(0.5, 0.5);
+        this.appIcon = this.add.image(SpeedMatch.game.config.width / 2, SpeedMatch.game.config.height / 4 - 100, "apptitle");
+        this.appIcon.setOrigin(0.5, 0);
 
         /* Adding and configuring progress bar */
         this.setupProgressBar();
@@ -36,7 +40,15 @@ class PreloadScene extends Phaser.Scene {
     }
 
     create() {
-        this.scene.start("IntroScene");
+        this.tweens.add({
+            targets: [this.appIcon],
+            y: 100,
+            duration: SpeedMatch.GameOptions.tileTimerDelay,
+            callbackScope: this,
+            onComplete: function () {
+                this.scene.start("IntroScene");
+            }
+        });
     }
 
     setupProgressBar() {
