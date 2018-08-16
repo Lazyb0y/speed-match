@@ -11,6 +11,7 @@ class GameScene extends Phaser.Scene {
         this.currentFrame = -1;
 
         this.symbol = null;
+        this.appIcon = null;
         this.hints = null;
 
         this.scoreText = null;
@@ -27,6 +28,10 @@ class GameScene extends Phaser.Scene {
     }
 
     create() {
+        /* Showing application title */
+        this.appIcon = this.add.image(SpeedMatch.game.config.width / 2, 100, "apptitle");
+        this.appIcon.setOrigin(0.5, 0);
+
         /* Adding UI buttons */
         let noButton = this.add.sprite(0, SpeedMatch.game.config.height, "no");
         noButton.setOrigin(0, 1);

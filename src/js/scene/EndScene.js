@@ -6,16 +6,19 @@ class EndScene extends Phaser.Scene {
     init(data) {
         this.data = data;
 
+        this.appIcon = null;
+
         this.previousClientWidth = 0;
         this.previousClientHeight = 0;
 
         this.isPortraitMode = true;
     }
 
-    preload() {
-    }
-
     create() {
+        /* Showing application title */
+        this.appIcon = this.add.image(SpeedMatch.game.config.width / 2, 100, "apptitle");
+        this.appIcon.setOrigin(0.5, 0);
+
         console.log("Game End: " + this.data.score);
     }
 
