@@ -85,7 +85,10 @@ class GameScene extends Phaser.Scene {
         }
         else {
             this.timedEvent.remove(false);
-            this.scene.start("EndScene");
+            this.scene.start("EndScene", {
+                score: this.score,
+                bestScore: this.bestScore
+            });
         }
     }
 
@@ -139,7 +142,10 @@ class GameScene extends Phaser.Scene {
         }
         else {
             this.timedEvent.remove(false);
-            this.scene.start("EndScene");
+            this.scene.start("EndScene", {
+                score: this.score,
+                bestScore: this.bestScore
+            });
         }
     }
 
@@ -156,7 +162,10 @@ class GameScene extends Phaser.Scene {
         }
         else {
             this.timedEvent.remove(false);
-            this.scene.start("EndScene");
+            this.scene.start("EndScene", {
+                score: this.score,
+                bestScore: this.bestScore
+            });
         }
     }
 }

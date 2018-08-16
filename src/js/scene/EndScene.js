@@ -3,10 +3,14 @@ class EndScene extends Phaser.Scene {
         super("EndScene");
     }
 
+    init(data) {
+        this.data = data;
+    }
+
     preload() {
     }
 
     create() {
-        console.log("Game End");
+        console.log("Game End: " + this.data.score);
     }
 }
