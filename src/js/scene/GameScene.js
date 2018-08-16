@@ -12,6 +12,9 @@ class GameScene extends Phaser.Scene {
 
         this.symbol = null;
 
+        this.scoreText = null;
+        this.bestScoreText = null;
+
         this.score = 0;
     }
 
@@ -30,6 +33,20 @@ class GameScene extends Phaser.Scene {
         /* Loading symbols */
         this.symbol = this.add.sprite(SpeedMatch.game.config.width / 2, SpeedMatch.game.config.height / 2, "symbols", 0);
         this.symbol.setOrigin(0.5, 0.5);
+
+        /* UI scores */
+        let scoreX = SpeedMatch.game.config.width / 2;
+        let scoreY = (SpeedMatch.game.config.height / 2) - SpeedMatch.GameOptions.tileSize;
+        this.add.image(scoreX, scoreY, "scorepanel");
+        this.add.image(scoreX, scoreY - 90, "scorelabels");
+
+        let scoreTextX = SpeedMatch.game.config.width / 8;
+        let scoreTextY = (SpeedMatch.game.config.height / 2) - SpeedMatch.GameOptions.tileSize - 45;
+        this.scoreText = this.add.bitmapText(scoreTextX, scoreTextY, "font", "0", 100);
+
+        let bestScoreTextX = (SpeedMatch.game.config.width / 8) * 4.3;
+        let bestScoreTextY = (SpeedMatch.game.config.height / 2) - SpeedMatch.GameOptions.tileSize - 45;
+        this.bestScoreText = this.add.bitmapText(bestScoreTextX, bestScoreTextY, "font", "0", 100);
 
         this.showNextSymbol();
     }
