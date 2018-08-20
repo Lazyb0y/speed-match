@@ -34,6 +34,10 @@ class PreloadScene extends Phaser.Scene {
             frameHeight: 100
         });
 
+        /* Loading sound effect */
+        this.load.audio("correct", ["assets/sounds/correct.ogg", "assets/sounds/correct.mp3"]);
+        this.load.audio("incorrect", ["assets/sounds/incorrect.ogg", "assets/sounds/incorrect.mp3"]);
+
         /* Loading font */
         this.load.bitmapFont("font", "assets/fonts/font.png", "assets/fonts/font.fnt");
         this.load.bitmapFont("timerfont", "assets/fonts/timerfont.png", "assets/fonts/timerfont.fnt");

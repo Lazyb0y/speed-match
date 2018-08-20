@@ -78,6 +78,9 @@ class GameScene extends Phaser.Scene {
         }
         this.bestScoreText.text = this.bestScore.toString();
 
+        /* Initializing sounds */
+        this.correctSound = this.sound.add("correct");
+        this.incorrectSound = this.sound.add("incorrect");
         this.showNextSymbol();
     }
 
@@ -126,6 +129,25 @@ class GameScene extends Phaser.Scene {
         }
     }
 
+    gameFinish() {
+        this.timedEvent.remove(false);
+        this.incorrectSound.play();
+
+        let timerConfig = {
+            delay: SpeedMatch.GameOptions.animations.gameFinishedDelay,
+            callback: function () {
+                this.scene.start("EndScene", {
+                    score: this.score,
+                    bestScore: this.bestScore
+                });
+            },
+            callbackScope: this,
+            paused: false
+        };
+
+        this.time.addEvent(timerConfig);
+    }
+
     scheduleNextTimer() {
         let timerConfig = {
             delay: this.timedEvent === null ? SpeedMatch.GameOptions.tileTimerInitialDelay : SpeedMatch.GameOptions.tileTimerDelay,
@@ -151,11 +173,7 @@ class GameScene extends Phaser.Scene {
             this.showNextSymbol();
         }
         else {
-            this.timedEvent.remove(false);
-            this.scene.start("EndScene", {
-                score: this.score,
-                bestScore: this.bestScore
-            });
+            this.gameFinish();
         }
     }
 
@@ -195,6 +213,7 @@ class GameScene extends Phaser.Scene {
     incrementScore() {
         this.score++;
         this.scoreText.text = this.score.toString();
+        this.correctSound.play();
 
         if (this.score > this.bestScore) {
             this.bestScore = this.score;
@@ -215,11 +234,7 @@ class GameScene extends Phaser.Scene {
             this.showNextSymbol();
         }
         else {
-            this.timedEvent.remove(false);
-            this.scene.start("EndScene", {
-                score: this.score,
-                bestScore: this.bestScore
-            });
+            this.gameFinish();
         }
     }
 
@@ -235,11 +250,7 @@ class GameScene extends Phaser.Scene {
             this.showNextSymbol();
         }
         else {
-            this.timedEvent.remove(false);
-            this.scene.start("EndScene", {
-                score: this.score,
-                bestScore: this.bestScore
-            });
+            this.gameFinish();
         }
     }
 }

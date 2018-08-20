@@ -7,6 +7,7 @@ SpeedMatch.GameOptions = {
     tileTimerDelay: 1000,
     animations: {
         buttonAppearDelay: 500,
+        gameFinishedDelay: 3000,
         symbolAppearDelay: 50
     },
     storage: {
