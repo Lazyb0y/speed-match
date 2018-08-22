@@ -146,6 +146,12 @@ class GameScene extends Phaser.Scene {
         };
 
         this.time.addEvent(timerConfig);
+        this.tweens.add({
+            targets: [this.noButton, this.yesButton],
+            y: SpeedMatch.game.config.height + 300,
+            duration: SpeedMatch.GameOptions.animations.buttonAppearDelay,
+            callbackScope: this
+        });
     }
 
     scheduleNextTimer() {
