@@ -22,6 +22,8 @@ class PreloadScene extends Phaser.Scene {
         this.load.image("scorepanel", "assets/sprites/scorepanel.png");
         this.load.image("gameintro", "assets/sprites/gameintro.png");
         this.load.image("start", "assets/sprites/start.png");
+        this.load.image("crown", "assets/sprites/crown.png");
+        this.load.image("newbest", "assets/sprites/newbest.png");
 
         /* Loading spritesheet */
         this.load.spritesheet("symbols", "assets/sprites/symbols.png", {
