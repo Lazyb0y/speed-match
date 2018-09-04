@@ -48,4 +48,5 @@ window.onload = function () {
     window.focus();
     resizeGame();
     window.addEventListener("resize", resizeGame);
+    window.addEventListener('contextmenu', event => event.preventDefault());
 };
