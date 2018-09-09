@@ -31,7 +31,7 @@ class EndScene extends Phaser.Scene {
         this.bestScoreText = this.add.bitmapText(SpeedMatch.game.config.width / 2, SpeedMatch.game.config.height / 2 + 100, "timerfont", "BEST: " + this.data.bestScore, 60);
         this.bestScoreText.setOrigin(0.5, 0);
 
-        if (this.data.bestScore === this.data.score) {
+        if (this.data.bestScore === this.data.score && this.data.bestScore !== 0) {
             this.newBest = this.add.image(SpeedMatch.game.config.width / 2, SpeedMatch.game.config.height / 2 - 160, "newbest");
             this.newBest.setOrigin(0.5, 1);
 
