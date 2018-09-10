@@ -17,7 +17,7 @@ class IntroScene extends Phaser.Scene {
         this.appIcon = this.add.image(SpeedMatch.game.config.width / 2, 100, "apptitle");
         this.appIcon.setOrigin(0.5, 0);
 
-        let gameIntro = this.add.image(SpeedMatch.game.config.width / 2, SpeedMatch.game.config.height / 2, "gameintro");
+        let gameIntro = this.add.image(SpeedMatch.game.config.width / 2, SpeedMatch.game.config.height / 2 - 200, "gameintro");
         gameIntro.setOrigin(0.5, 0.5);
 
         /* Start button */
